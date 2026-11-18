@@ -10,7 +10,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.locationproject.databinding.ActivityMapsBinding;
 
@@ -46,9 +48,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Cria um MarkerOptions para um marcador na UCSAL
+        MarkerOptions ucsal_markerOptions = new MarkerOptions();
+        ucsal_markerOptions.position(new LatLng(-12.94825, - 38.41334));
+        ucsal_markerOptions.title("UCSAL");
+        ucsal_markerOptions.snippet("Campus Pituaçu");
+
+        // Adiciona marcador ao mapa
+        Marker myMarker = mMap.addMarker(ucsal_markerOptions);
+
+        // Centraliza a câmera na posição do marcador mudando o zoom
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom
+                (new LatLng(-12.94825, - 38.41334), 15));
+
+        // Define tipo do mapa
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        // Habilita mapas indoor e 3D
+        mMap.setIndoorEnabled(true);
+        mMap.setBuildingsEnabled(true);
+
+        // Configura elementos da interface gráfica
+        UiSettings mapUI = mMap.getUiSettings();
+
+        // Habilita pan, zoom, tilt, rotate
+        mapUI.setAllGesturesEnabled(true);
+
+        // Habilita a bússula
+        mapUI.setCompassEnabled(true);
+
+        // Habilita controle do zoom
+        mapUI.setZoomControlsEnabled(true);
     }
 }

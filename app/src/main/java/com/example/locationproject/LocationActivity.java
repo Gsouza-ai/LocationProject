@@ -111,11 +111,11 @@ public class LocationActivity extends AppCompatActivity {
         TextView locationTextView = (TextView) findViewById(R.id.textViewLocation);
         String s = "Dados da Última Localização:\n";
         if (location != null) {
-            s += "Latitude: " + location.getLatitude() + "\n";
-            s += "Longitude: " + location.getLongitude() + "\n";
+            s += "Latitude: (G/M/S)" + Location.convert(location.getLatitude(), Location.FORMAT_SECONDS) + "\n";
+            s += "Longitude: (G/M/S)" + Location.convert(location.getLongitude(), Location.FORMAT_SECONDS)+ "\n";
             s += "Altitude: " + location.getAltitude() + "\n";
             s += "Rumo: (radianos)" + location.getBearing() + "\n";
-            s += "Velocidade (m/s): " + location.getSpeed() + "\n";
+            s += "Velocidade (m/s): " + location.getAltitude() + "\n";
             s += "Precisão: (m)" + location.getAccuracy() + "\n";
         }
         locationTextView.setText(s);
